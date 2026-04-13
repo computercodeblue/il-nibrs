@@ -1,8 +1,15 @@
 namespace ComputerCodeBlue.ILNIBRS.Cli.Models;
 
-public class VerifyUploadRequest : UploadRequest
+public class ChangePasswordRequest : NibrsRequestBase
 {
-    public new string RequestBody
+    public string NewPassword { get; set; } = string.Empty;
+
+    public ChangePasswordRequest()
+    {
+        _headers.Add("SOAPAction", "http://www.otech.com/SwifthRepository/SwiftUpload/SwiftUpload/ResetPassword");
+    }
+
+    public string RequestBody
     {
         get
         {
@@ -17,17 +24,11 @@ public class VerifyUploadRequest : UploadRequest
     </h:SwiftUploadCredentials>
   </s:Header>
   <s:Body>
-    <h:VerifyUploadRequest>
-      <h:FileName>{FileName}</h:FileName>
-      <h:File>{FileBase64}</h:File>
-    </h:VerifyUploadRequest>
+    <h:ChangePasswordRequest>
+      <h:NewPassword>{NewPassword}</h:NewPassword>
+    </h:ChangePasswordRequest>
   </s:Body>
 </s:Envelope>";
         }
-    }
-     
-    public VerifyUploadRequest()
-    {
-        _headers.Add("SOAPAction", "http://www.otech.com/SwifthRepository/SwiftUpload/SwiftUpload/VerifyUpload");
-    }    
+    }        
 }
